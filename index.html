@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamzah Chaerul Adam — IT Network & Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --off-white: #f8f7f4;
+    --light-gray: #f0ede8;
+    --mid-gray: #d4d0c8;
+    --text-primary: #1a1916;
+    --text-secondary: #5c5a54;
+    --text-muted: #9c9a94;
+    --accent: #1a3a5c;
+    --accent-light: #e8eef4;
+    --accent-mid: #2d5a8c;
+    --green: #2d6a4f;
+    --green-light: #e8f4ee;
+    --amber: #8a5a00;
+    --amber-light: #fef5e0;
+    --border: #e4e0d8;
+    --font: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--off-white);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248, 247, 244, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 2rem 80px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 strong {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item { }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: var(--mono);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-lbl {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent-mid); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--mid-gray); background: var(--light-gray); }
+
+  /* SECTIONS */
+  section { padding: 80px 2rem; max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+  .section-title strong { font-weight: 600; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text { font-size: 16px; color: var(--text-secondary); line-height: 1.8; }
+  .about-text p { margin-bottom: 1rem; }
+  .about-info { display: flex; flex-direction: column; gap: 1rem; }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .info-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .info-content { }
+  .info-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+  .info-value { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .skill-category {
+    font-size: 12px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .skill-tag.strong {
+    background: var(--accent-light);
+    border-color: transparent;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 1rem; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.25rem;
+    align-items: start;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .project-card:hover {
+    border-color: var(--mid-gray);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-top: 3px;
+    min-width: 24px;
+  }
+  .project-body { }
+  .project-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-tag {
+    font-size: 11px;
+    font-family: var(--mono);
+    padding: 3px 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    color: var(--text-secondary);
+  }
+  .project-badge {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0;
+  }
+  .badge-result {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-intro { font-size: 16px; color: var(--text-secondary); line-height: 1.8; }
+  .contact-intro p { margin-bottom: 1rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .contact-detail { font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 960px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag, .hero h1, .hero-sub, .hero-stats, .hero-cta {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-stats { animation-delay: 0.3s; }
+  .hero-cta { animation-delay: 0.4s; }
+
+  @media (max-width: 640px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 1.25rem 60px; }
+    section { padding: 60px 1.25rem; }
+    .project-card { grid-template-columns: auto 1fr; }
+    .project-badge { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">hamzah.ca</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Available for new opportunities</div>
+  <h1>IT Network &<br><strong>Infrastructure</strong><br>Specialist</h1>
+  <p class="hero-sub">5+ years building and managing enterprise IT infrastructure for multi-site manufacturing environments. From network architecture to cloud DR — end to end.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num">5+</span><span class="stat-lbl">Years experience</span></div>
+    <div class="stat-item"><span class="stat-num">500+</span><span class="stat-lbl">Users managed</span></div>
+    <div class="stat-item"><span class="stat-num">5+</span><span class="stat-lbl">Plant locations</span></div>
+    <div class="stat-item"><span class="stat-num">97%</span><span class="stat-lbl">Network uptime</span></div>
+    <div class="stat-item"><span class="stat-num">50+</span><span class="stat-lbl">IoT devices deployed</span></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary">Get in touch →</a>
+    <a href="#projects" class="btn-secondary">View projects</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// about me</div>
+  <div class="section-title">Building infrastructure<br><strong>that just works</strong></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm an IT Network & System Administrator based in Bekasi, West Java, with over 5 years of hands-on experience managing enterprise-grade infrastructure for PT. Garuda Yamato Steel — a multi-site steel manufacturing group with 5+ plant locations.</p>
+      <p>My work spans the full infrastructure stack: from designing redundant LAN/WAN networks and deploying Fortinet security policies, to migrating legacy VMware workloads to Nutanix HCI and building ransomware-proof backup systems with Veeam.</p>
+      <p>I thrive in complex, multi-site environments where reliability and security aren't optional — they're the baseline.</p>
+    </div>
+    <div class="about-info">
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div class="info-content">
+          <div class="info-label">Location</div>
+          <div class="info-value">Bekasi, Jawa Barat — open to Jabodetabek & Cirebon</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🎓</div>
+        <div class="info-content">
+          <div class="info-label">Education</div>
+          <div class="info-value">D3 Computer Engineering — AMIK BSI Jakarta</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📜</div>
+        <div class="info-content">
+          <div class="info-label">Certifications</div>
+          <div class="info-value">AWS Re/Start Graduate · Fortinet NSE 1</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">💼</div>
+        <div class="info-content">
+          <div class="info-label">Current role</div>
+          <div class="info-value">IT Network & System Administrator @ PT. Garuda Yamato Steel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// technical skills</div>
+  <div class="section-title">What I work<br><strong>with every day</strong></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Networking</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">Fortinet FortiGate</span>
+        <span class="skill-tag strong">Site-to-Site VPN</span>
+        <span class="skill-tag strong">VLAN</span>
+        <span class="skill-tag strong">LAN/WAN</span>
+        <span class="skill-tag">Fiber Optic</span>
+        <span class="skill-tag">Access Point</span>
+        <span class="skill-tag">MikroTik</span>
+        <span class="skill-tag">Structured Cabling</span>
+        <span class="skill-tag">High Availability</span>
+        <span class="skill-tag">Bandwidth Management</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Security</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">Zero Trust</span>
+        <span class="skill-tag strong">NAT / ACL</span>
+        <span class="skill-tag strong">Remote Access VPN</span>
+        <span class="skill-tag">WAF (F5 BIG-IP)</span>
+        <span class="skill-tag">Load Balancing</span>
+        <span class="skill-tag">SIEM ELK</span>
+        <span class="skill-tag">MFA</span>
+        <span class="skill-tag">Conditional Access</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">System Administration</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">Windows Server</span>
+        <span class="skill-tag strong">Linux Server</span>
+        <span class="skill-tag strong">Active Directory</span>
+        <span class="skill-tag strong">Microsoft Entra ID</span>
+        <span class="skill-tag">DNS / DHCP</span>
+        <span class="skill-tag">Office 365</span>
+        <span class="skill-tag">GPO</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Virtualization & Cloud</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">Nutanix HCI (AHV)</span>
+        <span class="skill-tag strong">VMware vSphere</span>
+        <span class="skill-tag strong">AWS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">EC2 / VPC</span>
+        <span class="skill-tag">AWS Elastic DR</span>
+        <span class="skill-tag">Terraform</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Backup & Monitoring</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">Veeam</span>
+        <span class="skill-tag strong">SolarWinds NPM</span>
+        <span class="skill-tag strong">Zabbix</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">QNAP / Synology</span>
+        <span class="skill-tag">RPO / RTO</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">IoT & Integration</div>
+      <div class="skill-tags">
+        <span class="skill-tag strong">SAP ERP API</span>
+        <span class="skill-tag strong">IoT Device Management</span>
+        <span class="skill-tag">KWh Meter</span>
+        <span class="skill-tag">Weighscale</span>
+        <span class="skill-tag">QC Measuring Tools</span>
+        <span class="skill-tag">Industrial IoT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// key projects</div>
+  <div class="section-title">Things I've<br><strong>built & deployed</strong></div>
+  <div class="projects-list">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-body">
+        <div class="project-title">Site-to-Site IPSec VPN — FortiGate 40F ↔ 201F</div>
+        <div class="project-desc">Deployed a secure IPSec IKEv2 tunnel between branch office (Noble House Jakarta) and HQ data center — establishing the first-ever encrypted direct connectivity between sites. Enabled centralized access to Active Directory, file servers, and ERP systems for branch users.</div>
+        <div class="project-tags">
+          <span class="project-tag">FortiGate</span>
+          <span class="project-tag">IPSec IKEv2</span>
+          <span class="project-tag">AES-256</span>
+          <span class="project-tag">Firewall Policy</span>
+          <span class="project-tag">SolarWinds</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">Zero incidents</span>
+        <span class="badge-result badge-blue">Production</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-body">
+        <div class="project-title">Nutanix HCI Data Center Migration</div>
+        <div class="project-desc">Led end-to-end migration of legacy VMware workloads to Nutanix AHV across the main data center. Improved scalability with Replication Factor for data resiliency, reducing hardware footprint and simplifying operations for 500+ users across 5+ sites.</div>
+        <div class="project-tags">
+          <span class="project-tag">Nutanix AHV</span>
+          <span class="project-tag">VMware vSphere</span>
+          <span class="project-tag">Data Center</span>
+          <span class="project-tag">HCI</span>
+          <span class="project-tag">Migration</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">Rp 2M BoQ</span>
+        <span class="badge-result badge-blue">5+ sites</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-body">
+        <div class="project-title">AWS Cloud Disaster Recovery</div>
+        <div class="project-desc">Designed and implemented a full disaster recovery solution using AWS Elastic DR with annual DR drills. Validated RTO/RPO targets with complete failover and failback procedures — achieving 100% business continuity compliance for critical manufacturing systems.</div>
+        <div class="project-tags">
+          <span class="project-tag">AWS Elastic DR</span>
+          <span class="project-tag">EC2 / VPC</span>
+          <span class="project-tag">Route53</span>
+          <span class="project-tag">RTO/RPO</span>
+          <span class="project-tag">Failover</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">100% RPO/RTO</span>
+        <span class="badge-result badge-amber">Annual drills</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-body">
+        <div class="project-title">Industrial IoT → SAP ERP Integration</div>
+        <div class="project-desc">Deployed and managed 21–50 IoT devices across 3 use cases: QC digital caliper (H-Beam measurement), KWh meter for energy billing, and scrap weighscale. All integrated directly into SAP ERP via API — fully replacing manual data entry processes plant-wide.</div>
+        <div class="project-tags">
+          <span class="project-tag">IoT</span>
+          <span class="project-tag">SAP ERP</span>
+          <span class="project-tag">REST API</span>
+          <span class="project-tag">Industrial</span>
+          <span class="project-tag">Automation</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">50+ devices</span>
+        <span class="badge-result badge-amber">3 use cases</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-body">
+        <div class="project-title">Veeam Backup Hardening & Domain Migration</div>
+        <div class="project-desc">Built a ransomware-proof backup architecture using Veeam with Hardened Linux Repository. Simultaneously orchestrated a zero-downtime Active Directory domain migration (nusantarabajaprofil.com → gyssteel.com) for all users and servers using ADMT.</div>
+        <div class="project-tags">
+          <span class="project-tag">Veeam</span>
+          <span class="project-tag">Linux</span>
+          <span class="project-tag">ADMT</span>
+          <span class="project-tag">Active Directory</span>
+          <span class="project-tag">Ransomware Protection</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">Zero downtime</span>
+        <span class="badge-result badge-blue">All users migrated</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">06</div>
+      <div class="project-body">
+        <div class="project-title">SolarWinds NPM — Centralized Network Monitoring</div>
+        <div class="project-desc">Deployed SolarWinds NPM for centralized monitoring of VPN tunnels, servers, switches, and network latency across all plant locations. Reduced incident detection time by ~50% (from 15–30 min to under 15 min), maintaining 95–97% network uptime on 400 Mbps capacity.</div>
+        <div class="project-tags">
+          <span class="project-tag">SolarWinds NPM</span>
+          <span class="project-tag">Zabbix</span>
+          <span class="project-tag">Grafana</span>
+          <span class="project-tag">SNMP</span>
+          <span class="project-tag">Alerting</span>
+        </div>
+      </div>
+      <div class="project-badge">
+        <span class="badge-result badge-green">50% faster detection</span>
+        <span class="badge-result badge-blue">95–97% uptime</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// contact</div>
+  <div class="section-title">Let's work<br><strong>together</strong></div>
+  <div class="contact-grid">
+    <div class="contact-intro">
+      <p>I'm currently open to new opportunities in IT Infrastructure, Network Engineering, or System Administration — particularly in the Jabodetabek area or Cirebon.</p>
+      <p>Whether you have a role in mind or just want to connect, feel free to reach out via any of the channels below.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:hamzahca21@gmail.com" class="contact-link">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <span>hamzahca21@gmail.com</span>
+          <span class="contact-detail">Email — fastest response</span>
+        </div>
+      </a>
+      <a href="tel:082217687181" class="contact-link">
+        <div class="contact-icon">📱</div>
+        <div>
+          <span>082217687181</span>
+          <span class="contact-detail">WhatsApp / Phone</span>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/hamzah-chaerul-adam" target="_blank" class="contact-link">
+        <div class="contact-icon">💼</div>
+        <div>
+          <span>linkedin.com/in/hamzah-chaerul-adam</span>
+          <span class="contact-detail">LinkedIn profile</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Hamzah Chaerul Adam · IT Network & Infrastructure Specialist · Bekasi, Jawa Barat · 2026</p>
+</footer>
+
+</body>
+</html>
